@@ -1,69 +1,118 @@
-// array de numeros inicialmente vazio
-let numeros = []
+// Listas inicialmente vazias
+let lista_principal = []
+let lista_multiplos_de_3 = []
+let lista_multiplos_de_5 = []
+let lista_multiplos_de_ambos = []
 
-// Criando lista de números dinamicamente
-function adicionaNumeros() {
+// 1 - preciso de uma lista com números de 1 a 50
+function gerarListaPrincipal() {
     for(n=1;n<=50;n++) {
-        numeros.push(n)
+        lista_principal.push(n)
     }
-    
-    return verificaValores()
+
+    return lista_principal
 }
 
-function verificaValores() {
-    // Fazendo loop para verificar item por item e atribuir o valor dos multiplos de forma dinâmica
-    for(let numero in numeros) {
+// 2 - lista somente com os números múltiplos de 3
+function gerarListaMultiplosDe3() {
 
-        const multiplo_de_3 = (numero++) * 3
-        const multiplo_de_5 = (numero++) * 5
+    for(n=1;n<=lista_principal.length;n++) {
+
+        const multiplo_de_3 = 3 * n
+
+        if(multiplo_de_3 < lista_principal.length) {
+            lista_multiplos_de_3.push(multiplo_de_3)
+        }
+    }
+
+    return lista_multiplos_de_3
+}
+
+// 3 - lista somente com os números múltiplos de 5
+function gerarListaMultiplosDe5() {
+
+    for(n=1;n<=lista_principal.length;n++) {
+
+        const multiplo_de_5 = 5 * n
+
+        if(multiplo_de_5 <= lista_principal.length) {
+            lista_multiplos_de_5.push(multiplo_de_5)
+        }
+    }
+
+    return lista_multiplos_de_5
+}
+
+// 4 - lista somente com os números múltiplos entre si
+function gerarListaMultiplosDeAmbos() {
+    for(n=1;n<=lista_principal.length;n++) {
+
+        const resto_da_divisao_1 = n % 3
+        const resto_da_divisao_2 = n % 5
         
-        // Substituindo multiplos de 3 pela string (Fizz)
-        if(multiplo_de_3 <= numeros.length) {
-            const index = multiplo_de_3 + 2
-
-            // Evitando a impressão em excesso
-            if(index !== -1 && index < numeros.length) {
-                numeros[index] = 'Fizz'
-            }
+        if(resto_da_divisao_1 == 0 && resto_da_divisao_2 == 0) {
+            lista_multiplos_de_ambos.push(n)
         }
-
-        // Substituindo multiplos de 5 pela string (Buzz)
-        if(multiplo_de_5 <= numeros.length) {
-            const index = multiplo_de_5 - 1
-
-            // Evitando a impressão em excesso
-            if(index !== -1 && index < numeros.length) {
-                numeros[index] = 'Buzz'
-            }
-        }
-
-        // Substituindo os multiplos de ambos pela string (FizzBuzz)
     }
 
-    return numeros
-
+    return lista_multiplos_de_ambos
 }
 
-function obterMultiploDeAmbos() {
-    let primeiro_item = 18
-    let proximo_item = 19
 
-    const lista_inversa = numeros.reverse()
-    const lista_atualizada = lista_inversa.filter((item) => item !== "Fizz" && item !== "Buzz")
-    const quantidade_de_items = lista_atualizada.length - primeiro_item
+function gerarListaFinal() {
+    // Substituindo multiplos de ambos pela palavra (FizBuzz)
+    const lista_multiplos_de_ambos = gerarListaMultiplosDeAmbos()
 
-    for(i=1;i<=quantidade_de_items;i++) {
-        const resto_da_divisao = lista_atualizada[primeiro_item] % lista_atualizada[proximo_item]
+    for(let item in lista_multiplos_de_ambos) {
+        const item_lista_multiplos_de_ambos = lista_multiplos_de_ambos[item]
 
-        if(i <= quantidade_de_items && resto_da_divisao == 0) {
-            console.log("FizzBuzz")
-        }
+        lista_principal.forEach((item) => {
+            if(item == item_lista_multiplos_de_ambos) {
+                const index = lista_principal.indexOf(item)
 
-        proximo_item++
+                if(item == item_lista_multiplos_de_ambos && item == item_lista_multiplos_de_ambos && item == item_lista_multiplos_de_ambos) {
+                    lista_principal[index] = 'FizzBuzz'
+                }
+            }
+        })
     }
 
+    // Substituindo multiplos de 5 pela palavra (Buzz)
+    const lista_multiplos_de_5 = gerarListaMultiplosDe5()
+
+    for(let item in lista_multiplos_de_5) {
+        const item_lista_multiplos_de_5 = lista_multiplos_de_5[item]
+
+        lista_principal.forEach((item) => {
+            if(item == item_lista_multiplos_de_5) {
+                const index = lista_principal.indexOf(item)
+
+                lista_principal[index] = 'Buzz'
+            }
+        })
+    }
+
+
+    // Substituindo multiplos de 3 pela palavra (Fizz)
+    const lista_multiplos_de_3 = gerarListaMultiplosDe3()
+
+    for(let item in lista_multiplos_de_3) {
+        const item_lista_multiplos_de_3 = lista_multiplos_de_3[item]
+
+        lista_principal.forEach((item) => {
+            if(item == item_lista_multiplos_de_3) {
+                const index = lista_principal.indexOf(item)
+
+                lista_principal[index] = 'Fizz'
+            }
+        })
+    }
+
+    console.log(lista_principal)
 }
 
-console.log(adicionaNumeros())
-
-obterMultiploDeAmbos()
+gerarListaPrincipal()
+gerarListaMultiplosDe3()
+gerarListaMultiplosDe5()
+gerarListaMultiplosDeAmbos()
+console.log(gerarListaFinal())
