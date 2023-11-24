@@ -13,17 +13,22 @@ const total_de_sistemas_de_pontuacao = 1
 // Função responsável por definir quais serão as regras em cada sistema de pontuação
 function sistemaDePontuacao1(total_de_pilotos) {
 
+    let dados_do_sistema_de_pontuacao = {
+        "ultima_posicao_a_receber_pontos": 3,
+        "quantidade_de_pontos_por_piloto": []
+    }
+
     let maior_numero_de_pontos = 12
 
     for(let n = 1; n <= total_de_pilotos; n++) {
         if(n <= total_de_pilotos) {
             const quantidade_de_pontos_por_piloto = (maior_numero_de_pontos - 2)
 
-            maior_numero_de_pontos = quantidade_de_pontos_por_piloto
-
-            console.log(quantidade_de_pontos_por_piloto)
+            dados_do_sistema_de_pontuacao.quantidade_de_pontos_por_piloto.push(maior_numero_de_pontos = quantidade_de_pontos_por_piloto)
         }
     }
+
+    return `${dados_do_sistema_de_pontuacao.ultima_posicao_a_receber_pontos} ${dados_do_sistema_de_pontuacao.quantidade_de_pontos_por_piloto}`
 }
 
 // Função responsável por gerar o ranking (ordem de chegada)
@@ -51,7 +56,7 @@ function ordemDeChegada(total_de_pilotos) {
         lista_sem_duplicacao.push(novo_piloto)
     }
 
-    console.log(lista_sem_duplicacao)
+    return lista_sem_duplicacao
 
 }
 
@@ -62,5 +67,15 @@ function gerarPiloto(total_de_pilotos) {
 }
 
 
+// Primeira linha
+console.log(`${numero_de_grandes_premios} ${total_de_pilotos}`)
+
+// Segunda linha
 gerarRanking(total_de_pilotos)
-ordemDeChegada(total_de_pilotos)
+console.log(ordemDeChegada(total_de_pilotos).toString())
+
+// Terceira linha
+console.log(total_de_sistemas_de_pontuacao.toString())
+
+// Tabela de pontuação
+console.log(sistemaDePontuacao1(total_de_pilotos))
