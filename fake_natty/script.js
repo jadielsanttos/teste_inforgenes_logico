@@ -28,7 +28,7 @@ function sistemaDePontuacao1(total_de_pilotos) {
         }
     }
 
-    return `${dados_do_sistema_de_pontuacao.ultima_posicao_a_receber_pontos} ${dados_do_sistema_de_pontuacao.quantidade_de_pontos_por_piloto}`
+    return dados_do_sistema_de_pontuacao
 }
 
 // Função responsável por gerar o ranking (ordem de chegada)
@@ -57,7 +57,6 @@ function ordemDeChegada(total_de_pilotos) {
     }
 
     return lista_sem_duplicacao
-
 }
 
 // Função responsável por gerar um piloto
@@ -66,16 +65,49 @@ function gerarPiloto(total_de_pilotos) {
     return piloto
 }
 
+// Função responsável por declarar o campeão ou os campeões da corrida
+function declararVencedores() {
+    let campeao = 0
+    // 1 - Simular uma corrida
+    const resultado_da_corrida = ordemDeChegada(total_de_pilotos) 
+
+    // 2 - Calcular o número total de pontos por piloto
+    const tabela_de_pontos = sistemaDePontuacao1(total_de_pilotos).quantidade_de_pontos_por_piloto
+
+    for(let n in tabela_de_pontos) {
+
+        // 3 - Comparar os indíces dos 2 arrays (tabela de pontos) e (resultado da corrida) para identificar o campeão
+        for(let p in resultado_da_corrida) {
+            if(n == p) {
+                const piloto = resultado_da_corrida[p]
+                const pontos_por_piloto = tabela_de_pontos[n]
+
+                if(pontos_por_piloto == 10) {
+                    campeao = piloto
+                }
+            }
+        }
+    }
+
+    return campeao
+}
+
+// Entrada
+console.log("!! ENTRADA !!")
 
 // Primeira linha
 console.log(`${numero_de_grandes_premios} ${total_de_pilotos}`)
 
 // Segunda linha
 gerarRanking(total_de_pilotos)
-console.log(ordemDeChegada(total_de_pilotos).toString())
+console.log(ordemDeChegada(total_de_pilotos).toString().replace(/,/g, " "))
 
 // Terceira linha
 console.log(total_de_sistemas_de_pontuacao.toString())
 
 // Tabela de pontuação
-console.log(sistemaDePontuacao1(total_de_pilotos))
+console.log(`${sistemaDePontuacao1(total_de_pilotos).ultima_posicao_a_receber_pontos} ${sistemaDePontuacao1(total_de_pilotos).quantidade_de_pontos_por_piloto.toString().replace(/,/g, " ")}`)
+
+// Saída
+console.log("!! SAÍDA !!")
+console.log(`O piloto ${declararVencedores()} é o campeão`)
