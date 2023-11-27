@@ -4,7 +4,7 @@ let lista_multiplos_de_3 = []
 let lista_multiplos_de_5 = []
 let lista_multiplos_de_ambos = []
 
-// 1 - preciso de uma lista com números de 1 a 50
+// 1 - Preenchendo lista principal com números de 1 a 50
 function gerarListaPrincipal() {
     for(n=1;n<=50;n++) {
         lista_principal.push(n)
@@ -13,7 +13,7 @@ function gerarListaPrincipal() {
     return lista_principal
 }
 
-// 2 - lista somente com os números múltiplos de 3
+// 2 - Preenchendo lista somente com os números múltiplos de 3
 function gerarListaMultiplosDe3() {
 
     for(n=1;n<=lista_principal.length;n++) {
@@ -28,7 +28,7 @@ function gerarListaMultiplosDe3() {
     return lista_multiplos_de_3
 }
 
-// 3 - lista somente com os números múltiplos de 5
+// 3 - Preenchendo lista somente com os números múltiplos de 5
 function gerarListaMultiplosDe5() {
 
     for(n=1;n<=lista_principal.length;n++) {
@@ -43,7 +43,7 @@ function gerarListaMultiplosDe5() {
     return lista_multiplos_de_5
 }
 
-// 4 - lista somente com os números múltiplos entre si
+// 4 - Preenchendo lista somente com os números múltiplos de ambos
 function gerarListaMultiplosDeAmbos() {
     for(n=1;n<=lista_principal.length;n++) {
 
@@ -58,7 +58,7 @@ function gerarListaMultiplosDeAmbos() {
     return lista_multiplos_de_ambos
 }
 
-
+// 5 - Comparando as listas e gerando a lista final atualizada
 function gerarListaFinal() {
     // Substituindo multiplos de ambos pela palavra (FizBuzz)
     const lista_multiplos_de_ambos = gerarListaMultiplosDeAmbos()
